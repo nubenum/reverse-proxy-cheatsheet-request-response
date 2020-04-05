@@ -39,7 +39,7 @@
                 transform: translate(50%,30px)
             }
             .entity, .payload {
-                fill: none;            
+                fill: none;
             }
             .entity {
                 stroke: black;
@@ -49,11 +49,11 @@
             .request-response {
                 transform: translate(200px,0px);
             }
-            .wireframe .entity {
-                width: var(--entity-width);
+            .rp-shadow .entity {
+                width: 350px;
             }
-            .wireframe .request-response {
-                transform: translate(var(--entity-width),0px);
+            .rp-shadow .request-response {
+                transform: translate(350px,0px);
             }
             .payload {
                 stroke: #bbb;
@@ -65,15 +65,12 @@
             }
             .client-group {
                 transform: translate(10px,50px);
-                --entity-width: 200px;
             }
             .rp-group {
                 transform: translate(610px,50px);
-                --entity-width: 350px;
             }
             .backend-group {
                 transform: translate(1360px,50px);
-                --entity-width: 200px;
             }
             .b {
                 fill: red;
@@ -89,35 +86,34 @@
             }
             .nginx {
                 transform: translate(10px,210px);
-            }            
+            }
         </style>
         <marker id="arrow" viewBox="0 0 20 20" refX="10" refY="10"
             markerWidth="10" markerHeight="10"
             orient="auto-start-reverse">
             <path d="M 0 0 L 20 10 L 0 20 z" />
         </marker>
-        <g id="wireframe" class="wireframe">
-            <rect class="entity" />
-            <g class="request-response">
-                <path class="arrow" d="M 10,10 390,10" marker-end="url(#arrow)" />
-                <rect class="payload" x="10" y="20" />
-                <path class="arrow" d="M 390,390 10,390" marker-end="url(#arrow)" />
-                <rect class="payload" x="40" y="230" />
-            </g>
+        <g id="wireframe" class="wireframe-shadow" />
+        <g id="request-response">
+            <path class="arrow" d="M 10,10 390,10" marker-end="url(#arrow)" />
+            <rect class="payload" x="10" y="20" />
+            <path class="arrow" d="M 390,390 10,390" marker-end="url(#arrow)" />
+            <rect class="payload" x="40" y="230" />
         </g>
-        <g id="entity">
+        <g id="client" class="client-shadow">
             <rect class="entity" />
-        </g>
-        <g id="client">
+            <use href="#request-response" class="request-response" />
             <text class="entity-head c" x="100" y="20" text-anchor="middle">Client</text>
         </g>
-        <g id="rp">
+        <g id="rp" class="rp-shadow">
+            <rect class="entity" />
+            <use href="#request-response" class="request-response" />
             <text class="entity-head r" x="175" y="20" text-anchor="middle">Reverse Proxy</text>
             <text class="entity-head" x="175" y="40" text-anchor="middle">Apache</text>
             <text class="entity-head" x="175" y="190" text-anchor="middle">Nginx</text>
         </g>
-        <g id="backend">
-            <use href="#entity" />
+        <g id="backend" class="backend-shadow">
+            <rect class="entity" />
             <text class="entity-head b" x="100" y="20" text-anchor="middle">Backend</text>
         </g>
     </defs>

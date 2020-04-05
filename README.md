@@ -1,6 +1,6 @@
 # Reverse Proxy Cheatsheet as a Request-Response Sequence Diagram
 
-Trying to understand, what headers and bodies the requests and responses between client, reverse proxy and backend actually contain.
+Trying to understand what headers and bodies the requests and responses between client, reverse proxy and backend actually contain.
 
 ## Getting Host, Port and Scheme right
 
