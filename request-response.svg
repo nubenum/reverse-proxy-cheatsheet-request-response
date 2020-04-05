@@ -4,7 +4,7 @@
     width="1580px"
     height="1580px"
     viewBox="0 0 1580 1580"
-    version="1.1">
+    version="2.0">
     <defs>
         <style>
             text {
@@ -12,7 +12,7 @@
                 font-size: 12px;
             }
             .code {
-                font-family: 'Courier New', monospace;            
+                font-family: 'Courier New', monospace;
             }
             .entity-head {
                 font-weight: bold;
@@ -84,12 +84,12 @@
             .c {
                 fill: green;
             }
-            .nginx {
-                display: none;
-            }
             .apache {
-                display: inline;
+                transform: translate(10px,60px);
             }
+            .nginx {
+                transform: translate(10px,210px);
+            }            
         </style>
         <marker id="arrow" viewBox="0 0 20 20" refX="10" refY="10"
             markerWidth="10" markerHeight="10"
@@ -113,6 +113,8 @@
         </g>
         <g id="rp">
             <text class="entity-head r" x="175" y="20" text-anchor="middle">Reverse Proxy</text>
+            <text class="entity-head" x="175" y="40" text-anchor="middle">Apache</text>
+            <text class="entity-head" x="175" y="190" text-anchor="middle">Nginx</text>
         </g>
         <g id="backend">
             <use href="#entity" />
@@ -130,13 +132,14 @@
                 <tspan x="0" dy="15">subsequent requests.</tspan>
             </text>         
             <text class="code request-code">
-                <tspan x="0" dy="15">GET </tspan><tspan class="c">/path</tspan><tspan> HTTP/1.1</tspan>
-                <tspan x="0" dy="15">Host: </tspan><tspan class="c">example.com</tspan>
+                <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
+                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
-                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend/target</tspan>
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend:8080/target</tspan>
                 <tspan x="0" dy="30">&lt;html&gt;</tspan>
-                <tspan x="0" dy="15">&lt;a href="<tspan class="b">http://backend/target</tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
                 <tspan x="0" dy="15">&lt;/html&gt;</tspan>
             </text>
         </g>
@@ -144,29 +147,30 @@
             <use href="#wireframe" />
             <use href="#rp" />
             <text class="code entity-code apache">
-                <tspan x="0" dy="15">ProxyPass / http://backend</tspan>
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
             </text>
             <text class="code entity-code nginx">
                 <tspan x="0" dy="15">location / {</tspan>
-                <tspan x="0" dy="15">   proxy_pass http://backend</tspan>
-                <tspan x="0" dy="15">   proxy_redirect off</tspan>
+                <tspan x="15" dy="15">proxy_pass http://backend:8080;</tspan>
+                <tspan x="15" dy="15">proxy_redirect off;</tspan>
                 <tspan x="0" dy="15">}</tspan>
             </text>
             <text class="code request-code">
-                <tspan x="0" dy="15">GET </tspan><tspan class="c">/path</tspan><tspan> HTTP/1.1</tspan>
-                <tspan x="0" dy="15">Host: </tspan><tspan class="r">backend</tspan>
+                <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
+                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend</tspan>
             </text>
             <text class="code response-code">
-                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend/target</tspan>
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend:8080/target</tspan>
                 <tspan x="0" dy="30">&lt;html&gt;</tspan>
-                <tspan x="0" dy="15">&lt;a href="<tspan class="b">http://backend/target</tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
                 <tspan x="0" dy="15">&lt;/html&gt;</tspan>
             </text>
         </g>
         <g class="backend-group">
             <use href="#backend" />
             <text class="entity-code">
-                <tspan x="0" dy="15">If the Reverse Proxy does</tspan>
+                <tspan x="0" dy="15">If the reverse proxy does</tspan>
                 <tspan x="0" dy="15">not do any Host magic,</tspan>
                 <tspan x="0" dy="15">the Backend must be</tspan>
                 <tspan x="0" dy="15">configured to know how</tspan>
@@ -176,5 +180,116 @@
                 <tspan x="0" dy="15">host in headers and body.</tspan>
             </text>
         </g>
-    </g>    
+    </g>
+    <g id="ex1" transform="translate(0,500)">
+        <text class="example-head" text-anchor="middle">Rewriting Location headers</text>
+        <g class="client-group">
+            <use href="#wireframe" />
+            <use href="#client" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">Headers will be correct,</tspan>
+                <tspan x="0" dy="15">absolute links in the</tspan>
+                <tspan x="0" dy="15">HTML will be wrong.</tspan>
+            </text>         
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
+                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="r">https://example.com/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="rp-group">
+            <use href="#wireframe" />
+            <use href="#rp" />
+            <text class="code entity-code apache">
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
+                <tspan x="0" dy="15">ProxyPassReverse / http://backend:8080</tspan>
+            </text>
+            <text class="code entity-code nginx">
+                <tspan x="0" dy="15">location / {</tspan>
+                <tspan x="15" dy="15">proxy_pass http://backend:8080;</tspan>
+                <tspan x="0" dy="15">}</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
+                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend:8080/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="backend-group">
+            <use href="#backend" />
+            <text class="code entity-code">
+            </text>
+        </g>
+    </g>
+    <g id="ex2" transform="translate(0,1000)">
+        <text class="example-head" text-anchor="middle">Preserving Host</text>
+        <g class="client-group">
+            <use href="#wireframe" />
+            <use href="#client" />
+            <text class="entity-code code">
+                <tspan x="0" dy="15">Host will be correct,</tspan>
+                <tspan x="0" dy="15">scheme (if the reverse</tspan>
+                <tspan x="0" dy="15">proxy does SSL</tspan>
+                <tspan x="0" dy="15">termination) and port</tspan>
+                <tspan x="0" dy="15">(if non-standard) will</tspan>
+                <tspan x="0" dy="15">be wrong.</tspan>
+            </text>         
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
+                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="rp-group">
+            <use href="#wireframe" />
+            <use href="#rp" />
+            <text class="code entity-code apache">
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
+                <tspan x="0" dy="15">ProxyPreserveHost On</tspan>
+            </text>
+            <text class="code entity-code nginx">
+                <tspan x="0" dy="15">location / {</tspan>
+                <tspan x="15" dy="15">proxy_pass http://backend:8080;</tspan>
+                <tspan x="15" dy="15">proxy_set_header Host $host;</tspan>
+                <tspan x="0" dy="15">}</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
+                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://</tspan><tspan class="r">example.com/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://</tspan><tspan class="r">example.com/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="backend-group">
+            <use href="#backend" />
+            <text class="code entity-code">
+                <tspan x="0" dy="15">Backend must also respond</tspan>
+                <tspan x="0" dy="15">to requests for Host</tspan>
+                <tspan x="0" dy="15">example.com</tspan>
+            </text>
+        </g>
+    </g>
 </svg>
