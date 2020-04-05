@@ -129,7 +129,7 @@
             </text>         
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
@@ -154,7 +154,7 @@
             </text>
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend:8080</tspan>
             </text>
             <text class="code response-code">
@@ -191,7 +191,7 @@
             </text>         
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
@@ -216,7 +216,7 @@
             </text>
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend:8080</tspan>
             </text>
             <text class="code response-code">
@@ -247,7 +247,7 @@
             </text>
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
@@ -273,7 +273,7 @@
             </text>
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
@@ -309,7 +309,7 @@
             </text>
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
@@ -338,7 +338,7 @@
             </text>
             <text class="code request-code">
                 <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
-                <tspan x="0" dy="15">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
                 <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend:8080</tspan>
                 <tspan x="0" dy="15">X-Forwarded-Host: </tspan><tspan class="r">example.com</tspan>
                 <tspan x="0" dy="15">X-Forwarded-Scheme: </tspan><tspan class="r">https</tspan>
@@ -357,6 +357,54 @@
                 <tspan x="0" dy="15">Backend must take into</tspan>
                 <tspan x="0" dy="15">account X-Forwarded-*</tspan>
                 <tspan x="0" dy="15">headers.</tspan>
+            </text>
+        </g>
+    </g>
+    <g id="html" transform="translate(0,2000)">
+        <text class="example-head" text-anchor="middle">Rewriting Headers and HTML</text>
+        <g class="client-group">
+            <use href="#wireframe" />
+            <use href="#client" />
+            <text class="entity-code code">
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: https://example.com/path)</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="r">https://example.com/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="r">https://example.com/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="rp-group">
+            <use href="#wireframe" />
+            <use href="#rp" />
+            <text class="code entity-code apache">
+                <tspan x="0" dy="15">mod_proxy_html (evil)</tspan>
+            </text>
+            <text class="code entity-code nginx">
+                <tspan x="0" dy="15">ngx_http_sub_module (evil)</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: http://backend:8080/path)</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend:8080</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend:8080/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="backend-group">
+            <use href="#backend" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">Last resort if backend</tspan>
+                <tspan x="0" dy="15">has hardcoded URLs.</tspan>
             </text>
         </g>
     </g>

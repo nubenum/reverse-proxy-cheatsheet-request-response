@@ -4,7 +4,9 @@ Trying to understand what headers and bodies the requests and responses between 
 
 ## Getting Host, Port and Scheme right
 
-![Request-Response Sequence Diagram](./request-response-host-port-scheme.svg)
+[View Large Version](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-host-port-scheme.svg?sanitize=true)
+
+[![Request-Response Sequence Diagram](./request-response-host-port-scheme.svg)](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-host-port-scheme.svg?sanitize=true)
 
 ## Useful CURL Commands
 
