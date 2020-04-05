@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1580px"
-    height="3000px"
-    viewBox="0 0 1580 3000"
+    width="1570px"
+    height="2500px"
+    viewBox="0 0 1570 2500"
     version="2.0">
     <defs>
         <style>
@@ -147,7 +147,7 @@
             <use href="#wireframe" />
             <use href="#rp" />
             <text class="code entity-code apache">
-                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080/</tspan>
                 <tspan x="0" dy="15">ProxyAddHeaders Off</tspan>
             </text>
             <text class="code entity-code nginx">
@@ -173,7 +173,7 @@
             <text class="entity-code">
                 <tspan x="0" dy="15">If the reverse proxy does</tspan>
                 <tspan x="0" dy="15">not do any Host magic,</tspan>
-                <tspan x="0" dy="15">the Backend must be</tspan>
+                <tspan x="0" dy="15">the backend must be</tspan>
                 <tspan x="0" dy="15">configured to know how</tspan>
                 <tspan x="0" dy="15">it's reachable from the</tspan>
                 <tspan x="0" dy="15">outside. Otherwise, it</tspan>
@@ -209,8 +209,8 @@
             <use href="#wireframe" />
             <use href="#rp" />
             <text class="code entity-code apache">
-                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
-                <tspan x="0" dy="15">ProxyPassReverse / http://backend:8080</tspan>
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080/</tspan>
+                <tspan x="0" dy="15">ProxyPassReverse / http://backend:8080/</tspan>
                 <tspan x="0" dy="15">ProxyAddHeaders Off</tspan>
             </text>
             <text class="code entity-code nginx">
@@ -241,7 +241,7 @@
         <g class="client-group">
             <use href="#wireframe" />
             <use href="#client" />
-            <text class="entity-code code">
+            <text class="entity-code">
                 <tspan x="0" dy="15">Host will be correct,</tspan>
                 <tspan x="0" dy="15">scheme (if the reverse</tspan>
                 <tspan x="0" dy="15">proxy does SSL</tspan>
@@ -257,7 +257,7 @@
             <text class="code response-code">
                 <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan>
                 <tspan x="0" dy="30">&lt;html&gt;</tspan>
-                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan><tspan>"&gt;…&lt;/a&gt;</tspan>
                 <tspan x="0" dy="15">&lt;/html&gt;</tspan>
             </text>
         </g>
@@ -265,7 +265,7 @@
             <use href="#wireframe" />
             <use href="#rp" />
             <text class="code entity-code apache">
-                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080/</tspan>
                 <tspan x="0" dy="15">ProxyPreserveHost On</tspan>
                 <tspan x="0" dy="15">ProxyAddHeaders Off</tspan>
             </text>
@@ -281,15 +281,15 @@
                 <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
             </text>
             <text class="code response-code">
-                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://</tspan><tspan class="r">example.com/target</tspan>
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan>
                 <tspan x="0" dy="30">&lt;html&gt;</tspan>
-                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://</tspan><tspan class="r">example.com/target</tspan><tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://</tspan><tspan class="r">example.com<tspan class="b">:8080</tspan>/target</tspan><tspan>"&gt;…&lt;/a&gt;</tspan>
                 <tspan x="0" dy="15">&lt;/html&gt;</tspan>
             </text>
         </g>
         <g class="backend-group">
             <use href="#backend" />
-            <text class="code entity-code">
+            <text class="entity-code">
                 <tspan x="0" dy="15">Backend must also respond</tspan>
                 <tspan x="0" dy="15">to requests for Host</tspan>
                 <tspan x="0" dy="15">example.com.</tspan>
@@ -327,7 +327,7 @@
             <use href="#wireframe" />
             <use href="#rp" />
             <text class="code entity-code apache">
-                <tspan x="0" dy="15">ProxyPass / http://backend:8080</tspan>
+                <tspan x="0" dy="15">ProxyPass / http://backend:8080/</tspan>
                 <tspan x="0" dy="15">ProxyAddHeaders On</tspan>
                 <tspan x="0" dy="15">RequestHeader set X-Forwarded-Proto "https"</tspan>
                 <tspan x="0" dy="15">RequestHeader set X-Forwarded-Port "443"</tspan>
@@ -357,7 +357,7 @@
         </g>
         <g class="backend-group">
             <use href="#backend" />
-            <text class="code entity-code">
+            <text class="entity-code">
                 <tspan x="0" dy="15">Backend must take into</tspan>
                 <tspan x="0" dy="15">account X-Forwarded-*</tspan>
                 <tspan x="0" dy="15">headers.</tspan>
