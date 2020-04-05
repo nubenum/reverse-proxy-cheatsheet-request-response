@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1580px"
+    height="1580px"
+    viewBox="0 0 1580 1580"
+    version="1.1">
+    <defs>
+        <style>
+            text {
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+            }
+            .code {
+                font-family: 'Courier New', monospace;            
+            }
+            .entity-head {
+                font-weight: bold;
+            }
+            .entity-code {
+                transform: translate(10px,40px);
+            }
+            .request-code {
+                transform: translate(220px,30px);
+            }
+            .response-code {
+                transform: translate(250px,240px);
+            }
+            .rp-group .request-code {
+                transform: translate(370px,30px);
+            }
+            .rp-group .response-code {
+                transform: translate(400px,240px);
+            }
+            .example-head {
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                font-size: 20px;
+                transform: translate(50%,30px)
+            }
+            .entity, .payload {
+                fill: none;            
+            }
+            .entity {
+                stroke: black;
+                width: 200px;
+                height: 400px;
+            }
+            .request-response {
+                transform: translate(200px,0px);
+            }
+            .wireframe .entity {
+                width: var(--entity-width);
+            }
+            .wireframe .request-response {
+                transform: translate(var(--entity-width),0px);
+            }
+            .payload {
+                stroke: #bbb;
+                width: 350px;
+                height: 150px;
+            }
+            .arrow {
+                stroke: black;
+            }
+            .client-group {
+                transform: translate(10px,50px);
+                --entity-width: 200px;
+            }
+            .rp-group {
+                transform: translate(610px,50px);
+                --entity-width: 350px;
+            }
+            .backend-group {
+                transform: translate(1360px,50px);
+                --entity-width: 200px;
+            }
+            .b {
+                fill: red;
+            }
+            .r {
+                fill: blue;
+            }
+            .c {
+                fill: green;
+            }
+            .nginx {
+                display: none;
+            }
+            .apache {
+                display: inline;
+            }
+        </style>
+        <marker id="arrow" viewBox="0 0 20 20" refX="10" refY="10"
+            markerWidth="10" markerHeight="10"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 20 10 L 0 20 z" />
+        </marker>
+        <g id="wireframe" class="wireframe">
+            <rect class="entity" />
+            <g class="request-response">
+                <path class="arrow" d="M 10,10 390,10" marker-end="url(#arrow)" />
+                <rect class="payload" x="10" y="20" />
+                <path class="arrow" d="M 390,390 10,390" marker-end="url(#arrow)" />
+                <rect class="payload" x="40" y="230" />
+            </g>
+        </g>
+        <g id="entity">
+            <rect class="entity" />
+        </g>
+        <g id="client">
+            <text class="entity-head c" x="100" y="20" text-anchor="middle">Client</text>
+        </g>
+        <g id="rp">
+            <text class="entity-head r" x="175" y="20" text-anchor="middle">Reverse Proxy</text>
+        </g>
+        <g id="backend">
+            <use href="#entity" />
+            <text class="entity-head b" x="100" y="20" text-anchor="middle">Backend</text>
+        </g>
+    </defs>
+    <g id="ex0" transform="translate(0,0)">
+        <text class="example-head" text-anchor="middle">Rewriting Nothing</text>
+        <g class="client-group">
+            <use href="#wireframe" />
+            <use href="#client" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">The client can't reach</tspan>
+                <tspan x="0" dy="15">http://backend/ for</tspan>
+                <tspan x="0" dy="15">subsequent requests.</tspan>
+            </text>         
+            <text class="code request-code">
+                <tspan x="0" dy="15">GET </tspan><tspan class="c">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="c">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="<tspan class="b">http://backend/target</tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="rp-group">
+            <use href="#wireframe" />
+            <use href="#rp" />
+            <text class="code entity-code apache">
+                <tspan x="0" dy="15">ProxyPass / http://backend</tspan>
+            </text>
+            <text class="code entity-code nginx">
+                <tspan x="0" dy="15">location / {</tspan>
+                <tspan x="0" dy="15">   proxy_pass http://backend</tspan>
+                <tspan x="0" dy="15">   proxy_redirect off</tspan>
+                <tspan x="0" dy="15">}</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">GET </tspan><tspan class="c">/path</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">backend</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend/target</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="<tspan class="b">http://backend/target</tspan>"&gt;Link&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="backend-group">
+            <use href="#backend" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">If the Reverse Proxy does</tspan>
+                <tspan x="0" dy="15">not do any Host magic,</tspan>
+                <tspan x="0" dy="15">the Backend must be</tspan>
+                <tspan x="0" dy="15">configured to know how</tspan>
+                <tspan x="0" dy="15">it's reachable from the</tspan>
+                <tspan x="0" dy="15">outside. Otherwise, it</tspan>
+                <tspan x="0" dy="15">will return the internal</tspan>
+                <tspan x="0" dy="15">host in headers and body.</tspan>
+            </text>
+        </g>
+    </g>    
+</svg>
