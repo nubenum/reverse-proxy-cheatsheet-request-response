@@ -6,9 +6,15 @@ Trying to understand what headers and bodies the requests and responses between 
 
 [View Large Version](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-host-port-scheme.svg?sanitize=true)
 
-[![Request-Response Sequence Diagram](./request-response-host-port-scheme.svg)](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-host-port-scheme.svg?sanitize=true)
+[![Request-Response Host, Port, Scheme Sequence Diagram](./request-response-host-port-scheme.svg)](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-host-port-scheme.svg?sanitize=true)
 
-## Useful CURL Commands
+## Getting Subpaths right
+
+[View Large Version](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-subpath.svg?sanitize=true)
+
+[![Request-Response Subpath Sequence Diagram](./request-response-subpath.svg)](https://raw.githubusercontent.com/nubenum/reverse-proxy-cheatsheet-request-response/master/request-response-subpath.svg?sanitize=true)
+
+## Useful cURL Commands
 
 Setting the Host header and being verbose:
 ```
