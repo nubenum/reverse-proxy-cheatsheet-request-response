@@ -3,7 +3,7 @@
     xmlns="http://www.w3.org/2000/svg"
     width="1370px"
     height="2500px"
-    viewBox="0 0 1370 2500"
+    viewBox="0 0 1370 3600"
     version="2.0">
     <defs>
         <style>
@@ -117,8 +117,8 @@
             <text class="entity-head b" x="75" y="20" text-anchor="middle">Backend</text>
         </g>
     </defs>
-    <g id="nothing" transform="translate(0,0)">
-        <text class="example-head" text-anchor="middle">Rewriting Nothing</text>
+    <g id="1-nothing" transform="translate(0,0)">
+        <text class="example-head" text-anchor="middle">1. Rewriting Nothing</text>
         <g class="client-group">
             <use href="#wireframe" />
             <use href="#client" />
@@ -184,8 +184,8 @@
             </text>
         </g>
     </g>
-    <g id="rewrite" transform="translate(0,500)">
-        <text class="example-head" text-anchor="middle">Rewriting Location Headers</text>
+    <g id="2-rewrite" transform="translate(0,500)">
+        <text class="example-head" text-anchor="middle">2. Rewriting Location Headers</text>
         <g class="client-group">
             <use href="#wireframe" />
             <use href="#client" />
@@ -241,8 +241,8 @@
             </text>
         </g>
     </g>
-    <g id="preserve" transform="translate(0,1000)">
-        <text class="example-head" text-anchor="middle">Preserving Host</text>
+    <g id="3-preserve" transform="translate(0,1000)">
+        <text class="example-head" text-anchor="middle">3. Preserving Host</text>
         <g class="client-group">
             <use href="#wireframe" />
             <use href="#client" />
@@ -313,8 +313,8 @@
             </text>
         </g>
     </g>
-    <g id="forward" transform="translate(0,1500)">
-        <text class="example-head" text-anchor="middle">Forwarding Headers</text>
+    <g id="4-forward" transform="translate(0,1500)">
+        <text class="example-head" text-anchor="middle">4. Forwarding Headers</text>
         <g class="client-group">
             <use href="#wireframe" />
             <use href="#client" />
@@ -341,14 +341,12 @@
                 <tspan x="0" dy="15">ProxyPass / http://backend:8080/</tspan>
                 <tspan x="0" dy="15">ProxyAddHeaders On</tspan>
                 <tspan x="0" dy="15">RequestHeader set X-Forwarded-Proto "https"</tspan>
-                <tspan x="0" dy="15">RequestHeader set X-Forwarded-Port "443"</tspan>
             </text>
             <text class="code entity-code nginx">
                 <tspan x="0" dy="15">location / {</tspan>
                 <tspan x="15" dy="15">proxy_pass http://backend:8080;</tspan>
-                <tspan x="15" dy="15">proxy_set_header X-Forwarded-Host $host;</tspan>
+                <tspan x="15" dy="15">proxy_set_header X-Forwarded-Host $host:$server_port;</tspan>
                 <tspan x="15" dy="15">proxy_set_header X-Forwarded-Proto https;</tspan>
-                <tspan x="15" dy="15">proxy_set_header X-Forwarded-Port 443;</tspan>
                 <tspan x="0" dy="15">}</tspan>
             </text>
             <text class="code request-code">
@@ -377,8 +375,8 @@
             </text>
         </g>
     </g>
-    <g id="html" transform="translate(0,2000)">
-        <text class="example-head" text-anchor="middle">Rewriting Headers and HTML</text>
+    <g id="5-html" transform="translate(0,2000)">
+        <text class="example-head" text-anchor="middle">5. Rewriting Headers and HTML</text>
         <g class="client-group">
             <use href="#wireframe" />
             <use href="#client" />
@@ -426,6 +424,155 @@
             <text class="entity-code">
                 <tspan x="0" dy="15">Last resort if backend</tspan>
                 <tspan x="0" dy="15">has hardcoded URLs.</tspan>
+            </text>
+        </g>
+    </g>
+    <path d="M 0,0 1370,0" transform="translate(0,2550)" class="arrow" />
+    <g id="6-subpath-mirrored" transform="translate(0,2600)">
+        <text class="example-head" text-anchor="middle">6. Mirrored subpaths</text>
+        <g class="client-group">
+            <use href="#wireframe" />
+            <use href="#client" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">Host, port etc. are</tspan>
+                <tspan x="0" dy="15">set according to one</tspan>
+                <tspan x="0" dy="15">of the methods above.</tspan>
+                <tspan x="0" dy="15">Pay attention to</tspan>
+                <tspan x="0" dy="15">trailing slashes</tspan>
+                <tspan x="0" dy="15">in the reverse proxy</tspan>
+                <tspan x="0" dy="15">configs!</tspan>
+                <tspan x="0" dy="15">And you might want</tspan>
+                <tspan x="0" dy="15">to additionally</tspan>
+                <tspan x="0" dy="15">configure a HTTP</tspan>
+                <tspan x="0" dy="15">redirection from</tspan>
+                <tspan x="0" dy="15">/path to /path/.</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: https://example.com/path/)</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path/</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="r">https://example.com/path/goal</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/path/goal</tspan><tspan>"&gt;</tspan>
+                <tspan x="15" dy="15">Link</tspan>
+                <tspan x="0" dy="15">&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="rp-group">
+            <use href="#wireframe" />
+            <use href="#rp" />
+            <text class="code entity-code apache">
+                <tspan x="0" dy="15">ProxyPass /path/ http://backend:8080/path/</tspan>
+                <tspan x="0" dy="15">ProxyPassReverse /path/ http://backend:8080/path/</tspan>
+                <tspan x="0" dy="15">ProxyAddHeaders Off</tspan>
+            </text>
+            <text class="code entity-code nginx">
+                <tspan x="0" dy="15">location /path/ {</tspan>
+                <tspan x="15" dy="15">proxy_pass http://backend:8080;</tspan>
+                <tspan x="0" dy="15">}</tspan>
+                <tspan x="0" dy="30">or:</tspan>
+                <tspan x="0" dy="15">location /path/ {</tspan>
+                <tspan x="15" dy="15">proxy_pass http://backend:8080/path/;</tspan>
+                <tspan x="0" dy="15">}</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: http://backend:8080/path/)</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/path/</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend:8080</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend:8080/path/goal</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/path/goal</tspan><tspan>"&gt;</tspan>
+                <tspan x="15" dy="15">Link</tspan>
+                <tspan x="0" dy="15">&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="backend-group">
+            <use href="#backend" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">The backend has to be</tspan>
+                <tspan x="0" dy="15">configured to be</tspan>
+                <tspan x="0" dy="15">reachable under this</tspan>
+                <tspan x="0" dy="15">subpath and return</tspan>
+                <tspan x="0" dy="15">the appropriate</tspan>
+                <tspan x="0" dy="15">headers and links.</tspan>
+            </text>
+        </g>
+    </g>
+    <g id="7-subpath-truncated" transform="translate(0,3100)">
+        <text class="example-head" text-anchor="middle">7. Truncated subpaths</text>
+        <g class="client-group">
+            <use href="#wireframe" />
+            <use href="#client" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">Host, port etc. are</tspan>
+                <tspan x="0" dy="15">set according to one</tspan>
+                <tspan x="0" dy="15">of the methods above.</tspan>
+                <tspan x="0" dy="15">Pay attention to</tspan>
+                <tspan x="0" dy="15">trailing slashes</tspan>
+                <tspan x="0" dy="15">in the reverse proxy</tspan>
+                <tspan x="0" dy="15">configs!</tspan>
+                <tspan x="0" dy="15">And you might want</tspan>
+                <tspan x="0" dy="15">to additionally</tspan>
+                <tspan x="0" dy="15">configure a HTTP</tspan>
+                <tspan x="0" dy="15">redirection from</tspan>
+                <tspan x="0" dy="15">/path to /path/.</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: https://example.com/path/)</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="r">/path/</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="r">example.com</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="r">https://example.com/path/goal</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/goal</tspan><tspan>"&gt;</tspan>
+                <tspan x="15" dy="15">Link</tspan>
+                <tspan x="0" dy="15">&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="rp-group">
+            <use href="#wireframe" />
+            <use href="#rp" />
+            <text class="code entity-code apache">
+                <tspan x="0" dy="15">ProxyPass /path/ http://backend:8080/</tspan>
+                <tspan x="0" dy="15">ProxyPassReverse /path/ http://backend:8080/</tspan>
+                <tspan x="0" dy="15">ProxyAddHeaders Off</tspan>
+            </text>
+            <text class="code entity-code nginx">
+                <tspan x="0" dy="15">location /path/ {</tspan>
+                <tspan x="15" dy="15">proxy_pass http://backend:8080/;</tspan>
+                <tspan x="0" dy="15">}</tspan>
+            </text>
+            <text class="code request-code">
+                <tspan x="0" dy="15">(Request URL: http://backend:8080/)</tspan>
+                <tspan x="0" dy="30">GET </tspan><tspan class="b">/</tspan><tspan> HTTP/1.1</tspan>
+                <tspan x="0" dy="15">Host: </tspan><tspan class="b">backend:8080</tspan>
+            </text>
+            <text class="code response-code">
+                <tspan x="0" dy="15">Location: </tspan><tspan class="b">http://backend:8080/goal</tspan>
+                <tspan x="0" dy="30">&lt;html&gt;</tspan>
+                <tspan x="0" dy="15">&lt;a href="</tspan><tspan class="b">http://backend:8080/goal</tspan><tspan>"&gt;</tspan>
+                <tspan x="15" dy="15">Link</tspan>
+                <tspan x="0" dy="15">&lt;/a&gt;</tspan>
+                <tspan x="0" dy="15">&lt;/html&gt;</tspan>
+            </text>
+        </g>
+        <g class="backend-group">
+            <use href="#backend" />
+            <text class="entity-code">
+                <tspan x="0" dy="15">The backend has to be</tspan>
+                <tspan x="0" dy="15">configured to be</tspan>
+                <tspan x="0" dy="15">reachable under the</tspan>
+                <tspan x="0" dy="15">root path, but to</tspan>
+                <tspan x="0" dy="15">return links with</tspan>
+                <tspan x="0" dy="15">the subpath.</tspan>
             </text>
         </g>
     </g>
